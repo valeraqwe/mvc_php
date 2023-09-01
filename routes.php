@@ -14,5 +14,13 @@ switch ($request) {
         require __DIR__ . '/controllers/UserController.php';
         viewUser();
         break;
+    case '/departments':
+        require __DIR__ . '/controllers/DepartmentController.php';
+        listDepartments();
+        break;
+    case '/add-department':
+        require __DIR__ . '/controllers/DepartmentController.php';
+        addDepartment();
+        break;
     // Add more routes
 }
