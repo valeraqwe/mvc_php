@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use models\User;
+
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Department.php';
 
