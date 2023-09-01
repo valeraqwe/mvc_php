@@ -1,24 +1,30 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../models/Department.php';
 
-class User {
-    public function __construct(
-        public string $email,
-        public string $username,
-        public ?string $address = null,
-        public ?string $telephone = null,
-        public ?string $comments = null,
-        public ?string $department = null
-    ) {}
+function listUsers(): void {
+    $users = User::getAll();
+    $departments = Department::getAll();  // Fetch departments for each user
+    require __DIR__ . '/../views/list_users.php';
+}
 
-    public static function getAll(): array {
-        // Retrieve all users from the database
-        return [];
+function addUser(): void {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $user = new User(
+            email: $_POST['email'] ?? '',
+            username: $_POST['username'] ?? '',
+            address: $_POST['address'] ?? null,
+            telephone: $_POST['telephone'] ?? null,
+            comments: $_POST['comments'] ?? null,
+            department: $_POST['department'] ?? null
+        );
+        User::create(get_object_vars($user));
     }
+    require __DIR__ . '/../views/add_user.php';
+}
 
-    public static function create(array $data): void {
-        // Insert a new user into the database
-    }
+function viewUser(): void {
+    // Implement view logic here using PHP 8 features
 }
